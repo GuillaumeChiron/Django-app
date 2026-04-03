@@ -9,19 +9,13 @@ def hello(request):
 
 
 def about(request):
-    return HttpResponse("<h1>About-us</h1> <p>Nous adorons Merch !!!</p>")
+    return render(request, "listings/about.html")
 
 
 def listings(request):
-    return HttpResponse(
-        "<h1>Listings</h1> "
-        "<ul>"
-        "<li>first merch</li>"
-        "<li>second merch</li>"
-        "<li>third merch</li>"
-        "</ul>"
-    )
+    listings = Listing.objects.all()
+    return render(request, "listings/listings.html", {"listings": listings})
 
 
 def contact(request):
-    return HttpResponse("<h1>Contact</h1> <p>contact@gmail.com</p>")
+    return render(request, "listings/contact.html")

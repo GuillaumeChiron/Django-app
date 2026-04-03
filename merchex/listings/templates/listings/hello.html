@@ -1,19 +1,13 @@
-<html lang="en">
+{% extends 'listings/base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merchex</title>
-</head>
+{% block content %}
 
-<body>
-    <h1>Hello Django !!!</h1>
-    <p>Mes groupes préférés sont: </p>
-    <ul>
-        <li>{{bands.0.name}}</li>
-        <li>{{bands.1.name}}</li>
-        <li>{{bands.2.name}}</li>
-    </ul>
-</body>
+<h1>Hello Django !!!</h1>
+<p>Mes groupes préférés sont: </p>
+<ul>
+    {%for band in bands%}
+    <li>{{band.name|upper}}</li>
+    {%endfor%}
+</ul>
 
-</html>
+{% endblock %}
