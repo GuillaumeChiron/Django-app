@@ -1,20 +1,14 @@
-<html lang="en">
+{% extends 'listings/base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merchex</title>
-</head>
+{% block content %}
 
-<body>
-    <h1>Voici nos annonces: </h1>
-    <ul>
-        {%for listing in listings%}
-        {%if listing.title|length > 65 %}
-        <li>{{listing.title}} / taille: {{listing.title|length}}</li>
-        {%endif%}
-        {%endfor%}
-    </ul>
-</body>
+<h1>Voici nos annonces: </h1>
+<ul>
+    {%for listing in listings%}
+    {%if listing.title|length > 65 %}
+    <li>{{listing.title}} / taille: {{listing.title|length}}</li>
+    {%endif%}
+    {%endfor%}
+</ul>
 
-</html>
+{% endblock %}
