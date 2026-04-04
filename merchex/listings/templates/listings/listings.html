@@ -5,9 +5,7 @@
 <h1>Voici nos annonces: </h1>
 <ul>
     {%for listing in listings%}
-    {%if listing.title|length > 65 %}
     <li>{{listing.title}} / taille: {{listing.title|length}}</li>
-    {%endif%}
     {%endfor%}
 </ul>
 
