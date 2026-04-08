@@ -5,7 +5,7 @@
 <h1>Voici nos annonces: </h1>
 <ul>
     {%for listing in listings%}
-    <li>{{listing.title}} / taille: {{listing.title|length}}</li>
+    <li> <a href="{% url 'listing-details' listing.id %}">{{listing.title}}</a></li>
     {%endfor%}
 </ul>
 

@@ -22,5 +22,10 @@ def listings(request):
     return render(request, "listings/listings.html", {"listings": listings})
 
 
+def listing_details(request, id):
+    listing = get_object_or_404(Listing, id=id)
+    return render(request, "listings/listings_details.html", {"listing": listing})
+
+
 def contact(request):
     return render(request, "listings/contact.html")
