@@ -3,6 +3,10 @@ from django.shortcuts import get_object_or_404
 from listings.models import Band, Listing
 
 
+def home_page(request):
+    return render(request, "listings/home_page.html")
+
+
 def band_list(request):
     bands = Band.objects.all()
     return render(request, "listings/band_list.html", {"bands": bands})
