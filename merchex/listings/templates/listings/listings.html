@@ -3,6 +3,9 @@
 {% block content %}
 
 <h1>Voici nos annonces: </h1>
+
+<a href="{% url 'listing-create' %}">Ajouter une nouvelle annonce</a>
+
 <ul>
     {%for listing in listings%}
     <li> <a href="{% url 'listing-details' listing.id %}">{{listing.title}}</a></li>

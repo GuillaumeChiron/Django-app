@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.mail import send_mail
 from listings.models import Band, Listing
-from listings.forms import ContactUsForm
+from listings.forms import ContactUsForm, BandForm, ListingForm
 
 
 def home_page(request):
@@ -18,6 +18,19 @@ def band_details(request, id):
     return render(request, "listings/band_details.html", {"band": band})
 
 
+def band_create(request):
+    if request.method == "POST":
+        form = BandForm(request.POST)
+        if form.is_valid():
+            band = form.save()
+            return redirect("band-detail", band.id)
+
+    else:
+        form = BandForm()
+
+    return render(request, "listings/band_create.html", {"form": form})
+
+
 def about(request):
     return render(request, "listings/about.html")
 
@@ -30,6 +43,17 @@ def listings(request):
 def listing_details(request, id):
     listing = get_object_or_404(Listing, id=id)
     return render(request, "listings/listings_details.html", {"listing": listing})
+
+
+def listing_create(request):
+    if request.method == "POST":
+        form = ListingForm(request.POST)
+        if form.is_valid():
+            listing = form.save()
+            return redirect("listing-details", listing.id)
+    else:
+        form = ListingForm()
+    return render(request, "listings/listing_create.html", {"form": form})
 
 
 def contact(request):

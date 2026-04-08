@@ -15,11 +15,14 @@
 
 <p>{{ band.biography }}</p>
 
+{% if band.listings.all %}
 <h2>Annonces:</h2>
+
 <ul>
     {% for listing in band.listings.all %}
     <li><a href="{% url 'listing-details' listing.id %}">{{listing}}</a></li>
     {% endfor %}
 </ul>
+{% endif %}
 
 {% endblock %}
