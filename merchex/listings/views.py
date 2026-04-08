@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.core.mail import send_mail
 from listings.models import Band, Listing
+from listings.forms import ContactUsForm
 
 
 def home_page(request):
@@ -32,4 +33,26 @@ def listing_details(request, id):
 
 
 def contact(request):
-    return render(request, "listings/contact.html")
+
+    if request.method == "POST":
+        # créer une instance de notre formulaire et le remplir avec les données POST
+        form = ContactUsForm(request.POST)
+
+        if form.is_valid():
+            send_mail(
+                subject=f'Message from {form.cleaned_data["name"] or "anonyme"} via MerchEx Contact Us form',
+                message=form.cleaned_data["message"],
+                from_email=form.cleaned_data["email"],
+                recipient_list=["admin@merchex.xyz"],
+            )
+            return redirect("email-sent")
+
+    else:
+        # ceci doit être une requête GET, donc créer un formulaire vide
+        form = ContactUsForm()
+
+    return render(request, "listings/contact.html", {"form": form})
+
+
+def email_sent(request):
+    return render(request, "listings/email_sent.html")
