@@ -43,6 +43,15 @@ def band_update(request, id):
     return render(request, "listings/band_update.html", {"form": form, "band": band})
 
 
+def band_delete(request, id):
+    band = get_object_or_404(Band, id=id)
+    if request.method == "POST":
+        band.delete()
+        return redirect("band-list")
+
+    return render(request, "listings/band_delete.html", {"band": band})
+
+
 def about(request):
     return render(request, "listings/about.html")
 
@@ -80,6 +89,14 @@ def listing_update(request, id):
     return render(
         request, "listings/listing_update.html", {"form": form, "listing": listing}
     )
+
+
+def listing_delete(request, id):
+    listing = get_object_or_404(Listing, id=id)
+    if request.method == "POST":
+        listing.delete()
+        return redirect("listings")
+    return render(request, "listings/listing_delete.html", {"listing": listing})
 
 
 def contact(request):
